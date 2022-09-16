@@ -1,25 +1,72 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import logo from "./logo.png";
+import React from "react";
+import { useState } from "react";
+import Name from "./Components/Name";
+import WorkSpace from "./Components/WorkSpace";
+import Usage from "./Components/Usage";
+import Submitted from "./Components/Submitted";
+import Progressbar from "./Components/Progressbar";
 
-function App() {
+export default function App() {
+  const [info, setInfo] = useState({
+    fullName: "",
+    userName: "",
+    workspaceName: "",
+    workspaceUrl: "",
+    usedBy: "",
+  });
+  const [step, setStep] = useState(1);
+
+  const Forms = () => {
+    if (step === 1) {
+      return <Name formData={info} setFormData={setInfo} />;
+    } else if (step === 2) {
+      return <WorkSpace formData={info} setFormData={setInfo} />;
+    } else if (step === 3) {
+      return <Usage formData={info} setFormData={setInfo} />;
+    } else if(step ===4){
+      return <Submitted formData={info} setFormData={setInfo} />;
+    }
+  };
+
+  const button = {
+    backgroundColor: "blueviolet",
+    color: "white",
+    fontSize: "20px",
+   
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+      <div className="App-header">
+        <h1>
+          <img className="mb-3 mr-1" src={logo} alt="logo" height={35} />
+          Eden
+        </h1>
+        <div className=" p-3" style={{width:'40%'}}>
+        <Progressbar step={step}/>
+          {Forms()}
+         
+        <button
+          type="submit"
+          className="btn btn-lg btn-block  my-5"
+          style={button}
+          
+            onClick={() => {
+              if (step === 4) {
+                alert("FORM SUBMITTED Please check console for info");
+                console.log(info);
+              } else {
+                setStep((currentStep) => currentStep + 1);
+              }
+            }}
+          
         >
-          Learn React
-        </a>
-      </header>
+            {step === 4 ? "Launch Eden" : "Create Workspace"}
+        </button>
+        </div>
+      </div>
     </div>
   );
 }
-
-export default App;
