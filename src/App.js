@@ -70,3 +70,7 @@ export default function App() {
     </div>
   );
 }
+
+App.defaultProps={
+  usedBy: "individual",
+}
