@@ -43,7 +43,7 @@ export default function WorkSpace({ formData, setFormData }) {
             placeholder="Example"
             value={formData.workspaceUrl}
             onChange={(e) => {
-              setFormData({ ...formData, workspaceUrl:  `www.eden.com/${e.target.value}`});
+              setFormData({ ...formData, workspaceUrl: e.target.value});
             }}
           />
         </div>
